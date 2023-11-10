@@ -1,8 +1,10 @@
-const login = async (event) => {
+const register = async (event) => {
   event.preventDefault();
 
   const name = document.getElementById('name').value;
   const password = document.getElementById('password').value;
+  const phone = document.getElementById('phone').value;
+  const twoFA = document.getElementById('2fa').checked;
 
   try {
     const response = await fetch('/api/register', {
@@ -11,7 +13,7 @@ const login = async (event) => {
         'Content-Type': 'application/json'
       },
 
-      body: JSON.stringify({ name: name, password: password })
+      body: JSON.stringify({ name, password, phone, twoFA }),
     });
 
     window.location = '/';
@@ -20,4 +22,9 @@ const login = async (event) => {
   }
 };
 
-document.getElementById('register-button').addEventListener('click', login);
+document.getElementById('register-form').addEventListener('submit', register);
+
+document.getElementById('2fa').addEventListener('change', function () {
+  var phoneInput = document.getElementById('phone');
+  phoneInput.required = this.checked;
+});
