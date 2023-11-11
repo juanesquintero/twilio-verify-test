@@ -6,7 +6,8 @@ let user = {};
 
 const getData = () => {
   // Get flow
-  flow = window.location.pathname.split("/")[-1];
+  const routes = window.location.pathname.split("/")
+  flow = routes.pop();
 
   // Get user
   const userValue = getDOMValue("user");
@@ -55,7 +56,6 @@ const check = async (event) => {
 };
 
 const next = () => {
-  debugger;
   switch (flow) {
     case "register":
       apiRegister(user);
