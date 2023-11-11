@@ -33,10 +33,12 @@ module.exports.profile = (request, response) => {
 
   const { user } = request.session;
 
+  const twoFAuthEnable = helper.has2FactorAuthEnabled(user);
+
   const view = {
     name: user.name,
-    pushIsDisabled: !helper.hasPushVerificationEnabled(user) ? true : false,
-    pushIsEnabled: helper.hasPushVerificationEnabled(user) ? true : false,
+    pushIsDisabled: !twoFAuthEnable,
+    pushIsEnabled: !!twoFAuthEnable,
     expiresIn: Math.round(request.session.cookie.maxAge / 1000 / 60),
   };
 
