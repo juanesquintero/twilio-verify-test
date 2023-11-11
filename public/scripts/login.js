@@ -1,3 +1,5 @@
+import { showError, checkResponse } from './utils.js';
+
 const login = async (event) => {
   event.preventDefault();
 
@@ -8,17 +10,19 @@ const login = async (event) => {
     const response = await fetch('/api/login', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
 
-      body: JSON.stringify({ name: name, password: password })
+      body: JSON.stringify({ name, password }),
     });
 
     const payload = await response.json();
 
+    checkResponse(response);
+
     window.location = payload.redirect;
   } catch (error) {
-    document.getElementById('error').style.display = 'block';
+    showError(error);
   }
 };
 
