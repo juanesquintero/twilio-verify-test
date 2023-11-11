@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+
+  <title>Verification</title>
+  <link rel="stylesheet" href="/styles/bulma.css" />
+  <link rel="stylesheet" href="/styles/default.css" />
+</head>
+
+<body>
+  <div class="main">
+    <form id="verify-form" class="container" style="max-width: 660px">
+      <h2 class="is-size-3 mb-2">Two-Factor Authentication(2FA) Verification</h2>
+      <div class="columns is-1 is-variable">
+        <div class="column">
+          <div class="field">
+            <p class="control has-icons-left">
+              <input id="code" class="input" type="number" placeholder="SMS code" required />
+              <span class="icon is-small is-left">
+                <i class="fas fa-comment-dots"></i>
+              </span>
+            </p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="buttons">
+            <input id="verify-button" type="submit" class="button is-primary" value="verify" />
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <script type="module" src="/scripts/verify.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+</body>
+
+</html>

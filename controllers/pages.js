@@ -3,6 +3,14 @@ const mustache = require('mustache');
 
 const helper = require('../session-helper');
 
+module.exports.verify = (request, response) => {
+  let page = fs.readFileSync('pages/verify.html', 'utf8');
+  const { flow } = request.params;  
+  const user = request.params;  
+  let render = mustache.render(page, {flow, user});
+  response.status(200).send(render);
+};
+
 module.exports.register = (request, response) => {
   let page = fs.readFileSync('pages/register.html', 'utf8');
   let render = mustache.render(page, {});
