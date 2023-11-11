@@ -1,3 +1,4 @@
+import { showError, checkResponse } from './utils.js';
 import { apiRegister } from './register.js';
 
 const submitFn = { register: apiRegister };
@@ -42,23 +43,17 @@ const check = async (event) => {
 
     checkResponse(response);
 
+    const body = await response.json();
+    
+    user.factor = {
+      type: 'push',
+      sid: body?.verification?.sid,
+    };
+
     submitFn[flow](user);
-    window.location = '/';
   } catch (error) {
     showError(error);
   }
-};
-
-const checkResponse = (response) => {
-  if (response.status !== 200) {
-    throw new Error(response.statusText);
-  }
-};
-
-const showError = (error = '') => {
-  const errorLbl = document.getElementById('error');
-  errorLbl.style.display = 'block';
-  errorLbl.innerHTML = errorLbl.innerHTML + `:  <small>(${error})</small>`;
 };
 
 document.getElementById('verify-form').addEventListener('submit', check);
