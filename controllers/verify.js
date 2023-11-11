@@ -2,9 +2,10 @@ const context = require("../context");
 
 module.exports.send = async (request, response) => {
   const { phone } = request.body;
+  const channel = "whatsapp";
 
   const op = async () => {
-    const verification = await context.verification.create(phone);
+    const verification = await context.verification.create({ phone, channel });
     sendResponse(verification, response);
   };
 
@@ -18,6 +19,7 @@ module.exports.check = async (request, response) => {
     const verification = await context.verification.check({ otpCode, phone });
     sendResponse(verification, response, true);
   };
+
   handleError(op, response);
 };
 
@@ -25,6 +27,7 @@ const handleError = async (cb, response) => {
   try {
     await cb();
   } catch (err) {
+    console.error(err);
     const error = err?.message ?? String(err);
     return response.status(500).json({ error }).end();
   }

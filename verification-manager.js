@@ -1,4 +1,4 @@
-const twilio = require('twilio');
+const twilio = require("twilio");
 
 class VerificationManager {
   constructor() {
@@ -8,10 +8,10 @@ class VerificationManager {
     );
   }
 
-  async create(phone) {
+  async create({phone, channel}) {
     const verification = await this.client.verify.v2
       .services(process.env.TWILIO_VERIFY_SERVICE_SID)
-      .verifications.create({ to: phone, channel: 'sms' });
+      .verifications.create({ to: phone, channel });
 
     return verification;
   }
