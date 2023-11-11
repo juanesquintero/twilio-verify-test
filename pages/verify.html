@@ -30,8 +30,13 @@
             <input id="verify-button" type="submit" class="button is-primary" value="verify" />
           </div>
         </div>
+        <span id="error" style="display: none" class="has-text-danger">
+          Error verifying 2FA OTP code.
+        </span>
       </div>
     </form>
+    <input id="user" hidden disabled value="{{user}}" />
+    <input id="flow" hidden disabled value="{{flow}}" />
   </div>
   <script type="module" src="/scripts/verify.js"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>

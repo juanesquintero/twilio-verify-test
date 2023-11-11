@@ -6,7 +6,7 @@ const helper = require('../session-helper');
 module.exports.verify = (request, response) => {
   let page = fs.readFileSync('pages/verify.html', 'utf8');
   const { flow } = request.params;  
-  const user = request.params;  
+  const user = JSON.stringify(request.body);  
   let render = mustache.render(page, {flow, user});
   response.status(200).send(render);
 };
