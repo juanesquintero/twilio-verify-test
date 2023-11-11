@@ -6,7 +6,7 @@ const register = async (event) => {
   const name = document.getElementById('name').value;
   const password = document.getElementById('password').value;
   const phone = document.getElementById('phone').value;
-  const twoFA = document.getElementById('2fa').checked;
+  const twoFA = document.getElementById('twoFA').checked;
 
   if (!twoFA) {
     apiRegister({ name, password, phone, twoFA: false });
@@ -35,7 +35,7 @@ const registerForm = document.getElementById('register-form');
 if (registerForm) {
   registerForm.addEventListener('submit', register);
 
-  document.getElementById('2fa').addEventListener('change', function () {
+  document.getElementById('twoFA').addEventListener('change', function () {
     var phoneInput = document.getElementById('phone');
     phoneInput.required = this.checked;
     if (this.checked) {

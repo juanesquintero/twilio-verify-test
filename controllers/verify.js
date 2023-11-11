@@ -12,10 +12,10 @@ module.exports.send = async (request, response) => {
 };
 
 module.exports.check = async (request, response) => {
-  const { code, phone } = request.body;
+  const { otpCode, phone } = request.body;
 
   const op = async () => {
-    const verification = await context.verification.check({ code, phone });
+    const verification = await context.verification.check({ otpCode, phone });
     sendResponse(verification, response, true);
   };
   handleError(op, response);

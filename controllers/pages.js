@@ -5,9 +5,12 @@ const helper = require('../session-helper');
 
 module.exports.verify = (request, response) => {
   let page = fs.readFileSync('pages/verify.html', 'utf8');
-  const { flow } = request.params;  
-  const user = JSON.stringify(request.body);  
-  let render = mustache.render(page, {flow, user});
+
+  const user = request.body;
+  user.twoFA = true;
+
+  let render = mustache.render(page, { user: JSON.stringify(user) });
+
   response.status(200).send(render);
 };
 
@@ -34,7 +37,7 @@ module.exports.profile = (request, response) => {
     name: user.name,
     pushIsDisabled: !helper.hasPushVerificationEnabled(user) ? true : false,
     pushIsEnabled: helper.hasPushVerificationEnabled(user) ? true : false,
-    expiresIn: Math.round(request.session.cookie.maxAge / 1000 / 60)
+    expiresIn: Math.round(request.session.cookie.maxAge / 1000 / 60),
   };
 
   let render = mustache.render(page, view);
@@ -46,7 +49,7 @@ module.exports.pending = (request, response) => {
   let page = fs.readFileSync('pages/push-challenge-pending.html', 'utf8');
 
   const view = {
-    name: request.session.user.name
+    name: request.session.user.name,
   };
 
   view.challengeSid = request.session.challenge.sid || '';
