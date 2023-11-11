@@ -19,14 +19,14 @@
         <div class="column">
           <div class="field">
             <p class="control">
-              <input id="name" class="input" type="name" placeholder="Name" required/>
+              <input name="name" id="name" class="input" type="name" placeholder="Name" required/>
             </p>
           </div>
         </div>
         <div class="column">
           <div class="field">
             <p class="control has-icons-left">
-              <input id="password" class="input" type="password" placeholder="Password" required/>
+              <input name="password" id="password" class="input" type="password" placeholder="Password" required/>
               <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
               </span>
@@ -38,7 +38,7 @@
         <div class="column">
           <div class="field">
             <p class="control has-icons-left">
-              <input id="phone" class="input" type="tel" placeholder="Phone Number" />
+              <input name="phone" id="phone" class="input" type="tel" placeholder="Phone Number" />
               <span class="icon is-small is-left">
                 <i class="fas fa-phone"></i>
               </span>
@@ -47,8 +47,9 @@
         </div>
         <div class="column">
           <label  class="checkbox p-3">
-            <input id="2fa" class="mx-3" type="checkbox"/>
-            Two-Factor Authentication(2FA) ?
+            <input name="2fa" id="2fa" class="mx-3" type="checkbox"/>
+            Two-Factor Authentication(2FA) 
+            <strong>?</strong>
             <i class="fas fa-comment-dots mx-2"></i>
           </label>
         </div>
@@ -56,12 +57,12 @@
       </div>
       <div class="column">
         <div class="buttons">
-          <input id="register-button" type="submit"  class="button is-primary" value="register"/>
+          <input name="register" id="register-button" type="submit"  class="button is-primary" value="register"/>
         </div>
       </div>
     </fo>
   </div>
-  <script src="scripts/register.js"></script>
+  <script type="module" src="scripts/register.js"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
 </body>
 

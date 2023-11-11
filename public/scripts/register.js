@@ -11,7 +11,7 @@ const register = async (event) => {
   }
 };
 
-const apiRegister = async (user) => {
+export const apiRegister = async (user) => {
     try {
       const response = await fetch('/api/register', {
         method: 'POST',
@@ -28,19 +28,21 @@ const apiRegister = async (user) => {
     }
 }
 
-var registerForm = document.getElementById('register-form');
+const registerForm = document.getElementById('register-form'); 
  
-registerForm.addEventListener('submit', register);
-
-document.getElementById('2fa').addEventListener('change', function () {
-  var phoneInput = document.getElementById('phone');
-  phoneInput.required = this.checked;
-  if (this.checked) {
-    registerForm.addEventListener('submit', function (event) {
-      this.submit();
-    });
-    registerForm.action = 'verify/register'
-  } else {
-    registerForm.addEventListener('submit', register);
-  }
-});
+if (registerForm) {
+  registerForm.addEventListener('submit', register);
+  
+  document.getElementById('2fa').addEventListener('change', function () {
+    var phoneInput = document.getElementById('phone');
+    phoneInput.required = this.checked;
+    if (this.checked) {
+      registerForm.addEventListener('submit', function (event) {
+        this.submit();
+      });
+      registerForm.action = 'verify/register'
+    } else {
+      registerForm.addEventListener('submit', register);
+    }
+  });
+}
