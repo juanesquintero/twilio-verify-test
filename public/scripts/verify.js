@@ -4,15 +4,14 @@ const submitFn = { register: apiRegister };
 
 // Get user and flow
 const flowInput = document.getElementById('flow');
-const flow = flowInput.value;
-flowInput.remove();
-
 const userInput = document.getElementById('user');
+const flow = flowInput.value;
 const user = JSON.parse(userInput.value);
+flowInput.remove();
 userInput.remove();
 
+// Send notification to verify user
 const send = async () => {
-  // Send notification to verify user
   try {
     const response = await fetch('/api/verify/send', {
       method: 'POST',
@@ -21,29 +20,45 @@ const send = async () => {
       },
       body: JSON.stringify(user),
     });
+    checkResponse(response);
   } catch (error) {
-    document.getElementById('error').style.display = 'block';
+    showError(error);
   }
 };
 
+// Check verification code input
 const check = async (event) => {
+  event.preventDefault();
   const code = document.getElementById('code').value;
 
-  event.preventDefault();
-  // Check verification code input
   try {
     const response = await fetch('/api/verify/check', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: { code },
+      body: JSON.stringify({ code, phone: user?.phone }),
     });
-    submitFn[flow]();
+
+    checkResponse(response);
+
+    submitFn[flow](user);
     window.location = '/';
   } catch (error) {
-    document.getElementById('error').style.display = 'block';
+    showError(error);
   }
+};
+
+const checkResponse = (response) => {
+  if (response.status !== 200) {
+    throw new Error(response.statusText);
+  }
+};
+
+const showError = (error = '') => {
+  const errorLbl = document.getElementById('error');
+  errorLbl.style.display = 'block';
+  errorLbl.innerHTML = errorLbl.innerHTML + `:  <small>(${error})</small>`;
 };
 
 document.getElementById('verify-form').addEventListener('submit', check);
