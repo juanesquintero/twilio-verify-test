@@ -13,7 +13,6 @@ class VerificationManager {
       .services(process.env.TWILIO_VERIFY_SERVICE_SID)
       .verifications.create({ to: phone, channel: "sms" });
 
-    console.log(verification);
     return verification;
   }
 
@@ -22,7 +21,6 @@ class VerificationManager {
       .services(process.env.TWILIO_VERIFY_SERVICE_SID)
       .verificationChecks.create({ to: phone, code: code })
 
-    console.log(verification);
     return verification;
   }
 }
