@@ -14,11 +14,12 @@
   <div class="main">
     <form id="verify-form" class="container" style="max-width: 660px">
       <h2 class="is-size-3 mb-2">Two-Factor Authentication(2FA) Verification</h2>
+      <p class="mb-2">Enter the code sent to your device</p>
       <div class="columns is-1 is-variable">
         <div class="column">
           <div class="field">
             <p class="control has-icons-left">
-              <input id="code" class="input" type="number" placeholder="SMS code" required />
+              <input id="otpCode" class="input" type="number" placeholder="SMS Code" required />
               <span class="icon is-small is-left">
                 <i class="fas fa-comment-dots"></i>
               </span>
@@ -27,16 +28,15 @@
         </div>
         <div class="column">
           <div class="buttons">
-            <input id="verify-button" type="submit" class="button is-primary" value="verify" />
+            <button id="verify-button" class="button is-primary">Verify</button>
           </div>
         </div>
       </div>
       <span id="error" style="display: none" class="has-text-danger">
-        Error verifying 2FA OTP code.
+        Error verifying 2FA OTP code
       </span>
     </form>
     <input id="user" hidden disabled value="{{user}}" />
-    <input id="flow" hidden disabled value="{{flow}}" />
   </div>
   <script type="module" src="/scripts/verify.js"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>

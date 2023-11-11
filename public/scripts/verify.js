@@ -1,15 +1,20 @@
-import { showError, checkResponse } from './utils.js';
+import { showError, checkResponse, getDOMValue } from './utils.js';
 import { apiRegister } from './register.js';
 
-const submitFn = { register: apiRegister };
+let flow, phone;
+let user = {};
 
-// Get user and flow
-const flowInput = document.getElementById('flow');
-const userInput = document.getElementById('user');
-const flow = flowInput.value;
-const user = JSON.parse(userInput.value);
-flowInput.remove();
-userInput.remove();
+const getData = () => {
+  // Get flow
+  flow = window.location.pathname.split('/')[-1];
+
+  // Get user
+  const userValue = getDOMValue('user');
+  user = userValue ? JSON.parse(userValue) : {};
+
+  // Get phone
+  phone = user?.phone ?? null;
+};
 
 // Send notification to verify user
 const send = async () => {
@@ -19,7 +24,7 @@ const send = async () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(user),
+      body: JSON.stringify({ phone }),
     });
     checkResponse(response);
   } catch (error) {
@@ -27,10 +32,10 @@ const send = async () => {
   }
 };
 
-// Check verification code input
+// Check verification otpCode input
 const check = async (event) => {
   event.preventDefault();
-  const code = document.getElementById('code').value;
+  const otpCode = document.getElementById('otpCode').value;
 
   try {
     const response = await fetch('/api/verify/check', {
@@ -38,24 +43,36 @@ const check = async (event) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ code, phone: user?.phone }),
+      body: JSON.stringify({ otpCode, phone }),
     });
 
     checkResponse(response);
 
-    const body = await response.json();
-    
-    user.factor = {
-      type: 'push',
-      sid: body?.verification?.sid,
-    };
-
-    submitFn[flow](user);
+    next();
   } catch (error) {
     showError(error);
   }
 };
 
+const next = () => {
+  debugger;
+  switch (flow) {
+    case 'register':
+      apiRegister(user);
+      break;
+    case 'login':
+      window.location = '/profile';
+      break;
+    case 'change-password':
+      // changePassword(user);
+      break;
+    default:
+      break;
+  }
+};
+
 document.getElementById('verify-form').addEventListener('submit', check);
+
+getData();
 
 send();
