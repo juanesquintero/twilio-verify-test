@@ -17,6 +17,10 @@ const helper = {
 
   hasPushVerificationEnabled: (user) => {
     return user.factor && user.factor.type === 'push';
+  },
+
+  has2FactorAuthEnabled: (user) => {
+    return !!(user.twoFA && user.phone);
   }
 };
 
