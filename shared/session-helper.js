@@ -1,4 +1,4 @@
-const context = require('./context');
+const context = require('../context');
 
 const helper = {
   hasPendingPushVerification: (request) => {

@@ -17,10 +17,10 @@ const pages = require('./controllers/pages');
 const validateSessionWithMultifactor = require('./middlewares/validate-session-with-multifactor');
 const validateSession = require('./middlewares/validate-session');
 
-const ChallengeManager = require('./challenge-manager');
-const DeviceManager = require('./device-manager');
-const UserRepository = require('./user-repository');
-const VerificationManager = require('./verification-manager');
+const ChallengeManager = require('./shared/challenge-manager');
+const DeviceManager = require('./shared/device-manager');
+const UserRepository = require('./shared/user-repository');
+const VerificationManager = require('./shared/verification-manager');
 
 context.repository = new UserRepository();
 context.devices = new DeviceManager();

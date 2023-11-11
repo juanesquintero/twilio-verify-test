@@ -1,7 +1,7 @@
 const fs = require("fs");
 const mustache = require("mustache");
 
-const helper = require("../session-helper");
+const helper = require("../shared/session-helper");
 
 module.exports.verify = (request, response) => {
   let page = fs.readFileSync("pages/verify.html", "utf8");

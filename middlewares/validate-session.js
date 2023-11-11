@@ -1,4 +1,4 @@
-const helper = require('../session-helper');
+const helper = require('../shared/session-helper');
 
 const validateSession = (request, response, next) => {
   if (!helper.hasValidSession(request)) {

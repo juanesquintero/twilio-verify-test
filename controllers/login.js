@@ -1,6 +1,6 @@
 const parser = require('ua-parser-js');
 
-const helper = require('../session-helper');
+const helper = require('../shared/session-helper');
 const context = require('../context');
 
 const login = async (request, response) => {
