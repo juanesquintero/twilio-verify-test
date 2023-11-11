@@ -1,4 +1,4 @@
-const context = require('../context');
+const context = require("../context");
 
 module.exports.send = async (request, response) => {
   const { phone } = request.body;

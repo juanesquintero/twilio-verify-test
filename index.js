@@ -51,6 +51,7 @@ app.get('/profile', validateSessionWithMultifactor, pages.profile);
 app.get('/logout', validateSessionWithMultifactor, pages.logout);
 app.get('/reject', pages.reject);
 app.get('/', pages.login);
+app.get('/login', pages.login);
 app.get('/register', pages.register);
 app.post('/verify/:flow', pages.verify);
 

@@ -1,10 +1,10 @@
-const fs = require('fs');
-const mustache = require('mustache');
+const fs = require("fs");
+const mustache = require("mustache");
 
-const helper = require('../session-helper');
+const helper = require("../session-helper");
 
 module.exports.verify = (request, response) => {
-  let page = fs.readFileSync('pages/verify.html', 'utf8');
+  let page = fs.readFileSync("pages/verify.html", "utf8");
 
   const user = request.body;
   user.twoFA = true;
@@ -15,21 +15,21 @@ module.exports.verify = (request, response) => {
 };
 
 module.exports.register = (request, response) => {
-  let page = fs.readFileSync('pages/register.html', 'utf8');
+  let page = fs.readFileSync("pages/register.html", "utf8");
   let render = mustache.render(page, {});
 
   response.status(200).send(render);
 };
 
 module.exports.login = (request, response) => {
-  let page = fs.readFileSync('pages/login.html', 'utf8');
+  let page = fs.readFileSync("pages/login.html", "utf8");
   let render = mustache.render(page, {});
 
   response.status(200).send(render);
 };
 
 module.exports.profile = (request, response) => {
-  let page = fs.readFileSync('pages/profile.html', 'utf8');
+  let page = fs.readFileSync("pages/profile.html", "utf8");
 
   const { user } = request.session;
 
@@ -46,13 +46,13 @@ module.exports.profile = (request, response) => {
 };
 
 module.exports.pending = (request, response) => {
-  let page = fs.readFileSync('pages/push-challenge-pending.html', 'utf8');
+  let page = fs.readFileSync("pages/push-challenge-pending.html", "utf8");
 
   const view = {
     name: request.session.user.name,
   };
 
-  view.challengeSid = request.session.challenge.sid || '';
+  view.challengeSid = request.session.challenge.sid || "";
 
   let render = mustache.render(page, view);
 
@@ -60,7 +60,7 @@ module.exports.pending = (request, response) => {
 };
 
 module.exports.reject = (request, response) => {
-  let page = fs.readFileSync('pages/push-challenge-rejected.html', 'utf8');
+  let page = fs.readFileSync("pages/push-challenge-rejected.html", "utf8");
 
   const view = {};
 
@@ -71,6 +71,6 @@ module.exports.reject = (request, response) => {
 
 module.exports.logout = (request, response) => {
   request.session.destroy((error) => {
-    response.redirect('/');
+    response.redirect("/");
   });
 };

@@ -8,14 +8,14 @@ class Repository {
     this.users = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'users.json'), 'utf8'));
   }
 
-  async create(name, password, phone=null, factor=null) {
-    const user = { 
-      id: uuidv4(), 
-      password: bcrypt.hashSync(password, 10), 
+  async create(name, password, phone=null, twoFA=false) {
+    const user = {
+      id: uuidv4(),
+      password: bcrypt.hashSync(password, 10),
       phone,
-      name, 
-      factor,
-    }
+      name,
+      twoFA,
+    };
     this.users.push(user);
     this.save();
   }

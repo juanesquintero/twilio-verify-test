@@ -1,10 +1,12 @@
 import { showError, checkResponse } from './utils.js';
 
-const login = async (event) => {
+const login = async function (event) {
   event.preventDefault();
 
   const name = document.getElementById('name').value;
   const password = document.getElementById('password').value;
+
+  const credentials = { name, password };
 
   try {
     const response = await fetch('/api/login', {
@@ -13,12 +15,21 @@ const login = async (event) => {
         'Content-Type': 'application/json',
       },
 
-      body: JSON.stringify({ name, password }),
+      body: JSON.stringify(credentials),
     });
+
+    checkResponse(response);
 
     const payload = await response.json();
 
-    checkResponse(response);
+    if (payload.redirect.includes('verify')) {
+      this.action = payload.redirect;
+      const phoneEl = document.getElementById('phone');
+      phoneEl.value = payload.phone;
+      phoneEl.disabled = false;
+      this.submit();
+      return;
+    }
 
     window.location = payload.redirect;
   } catch (error) {
@@ -26,4 +37,4 @@ const login = async (event) => {
   }
 };
 
-document.getElementById('login-button').addEventListener('click', login);
+document.getElementById('login-form').addEventListener('submit', login);
