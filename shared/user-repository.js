@@ -39,15 +39,11 @@ class Repository {
   async findUserByNameAndPassword(name, password) {
     const user = await this.users.findOne({ name: name });
 
-    if (!user) {
-      return;
-    }
+    if (!user) return;
 
     const match = await bcrypt.compare(password, user.password);
 
-    if (!match) {
-      return;
-    }
+    if (!match) return;
 
     return user;
   }
@@ -65,29 +61,24 @@ class Repository {
   }
 
   async updatePassword(id, newPassword) {
-    const result = await this.users.findOneAndUpdate(
-      { id: id },
-      { $set: { ...user, password: bcrypt.hashSync(newPassword, 10) } },
-      { returnDocument: 'after' }
-    );
-    if (result.value) {
-      res.json(result.value);
-    } else {
-      res.status(404).json({ error: 'User not found' });
-    }
+    const password = bcrypt.hashSync(newPassword, 10);
+    await this.updateField(id, 'password', password);
   }
 
   async addPushVerification(id, factor) {
+    await this.updateField(id, 'factor', factor);
+  }
+
+  async updateField(id, field, value) {
     const result = await this.users.findOneAndUpdate(
       { id: id },
-      { $set: { ...user, factor: factor } },
-      { returnDocument: 'after' }
+      { $set: { [field]: value } },
+      { upsert: true, returnDocument: 'after' }
     );
-    if (result.value) {
-      res.json(result.value);
-    } else {
-      res.status(404).json({ error: 'User not found' });
-    }
+
+    if (!!result) return result;
+
+    throw new Error('User not found');
   }
 }
 
