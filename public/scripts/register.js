@@ -36,7 +36,7 @@ if (registerForm) {
   registerForm.addEventListener('submit', register);
 
   document.getElementById('twoFA').addEventListener('change', function () {
-    var phoneInput = document.getElementById('phone');
+    const phoneInput = document.getElementById('phone');
     phoneInput.required = this.checked;
     if (this.checked) {
       registerForm.addEventListener('submit', function (event) {

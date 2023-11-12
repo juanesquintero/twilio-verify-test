@@ -24,9 +24,7 @@ const login = async function (event) {
 
     if (payload.redirect.includes('verify')) {
       this.action = payload.redirect;
-      const phoneEl = document.getElementById('phone');
-      phoneEl.value = payload.phone;
-      phoneEl.disabled = false;
+      document.getElementById('phone').value = payload.phone;
       this.submit();
       return;
     }

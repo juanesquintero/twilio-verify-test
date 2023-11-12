@@ -36,8 +36,10 @@
         Error verifying 2FA OTP code
       </span>
     </form>
-    <input id="user" hidden disabled value="{{user}}" />
   </div>
+  <script>
+    var globalUser = '{{{user}}}'
+  </script>
   <script type="module" src="/scripts/verify.js"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
 </body>

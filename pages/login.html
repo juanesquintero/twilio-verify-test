@@ -1,74 +1,56 @@
 <!DOCTYPE html>
 
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
 
-    <title>Login</title>
-    <link rel="stylesheet" href="/styles/bulma.css" />
-    <link rel="stylesheet" href="/styles/default.css" />
-  </head>
+<head>
+  <meta charset="utf-8" />
 
-  <body>
-    <div class="main">
-      <div class="container" style="max-width: 760px">
-        <h2 class="is-size-3 mb-2">Hey Stranger, please authenticate</h2>
+  <title>Login</title>
+  <link rel="stylesheet" href="/styles/bulma.css" />
+  <link rel="stylesheet" href="/styles/default.css" />
+</head>
 
-        <form
-          id="login-form"
-          method="post"
-          action="/"
-          class="columns is-1 is-variable"
-          style="margin-bottom: 0; margin-top: 0"
-        >
-          <div class="column">
-            <div class="field">
-              <p class="control">
-                <input
-                  id="name"
-                  class="input"
-                  type="name"
-                  placeholder="Name"
-                  required
-                />
-              </p>
-            </div>
+<body>
+  <div class="main">
+    <div class="container" style="max-width: 760px">
+      <h2 class="is-size-3 mb-2">Hey Stranger, please authenticate</h2>
+
+      <form id="login-form" method="post" action="/" class="columns is-1 is-variable"
+        style="margin-bottom: 0; margin-top: 0">
+        <div class="column">
+          <div class="field">
+            <p class="control">
+              <input id="name" class="input" type="name" placeholder="Name" required />
+            </p>
           </div>
-          <div class="column">
-            <div class="field">
-              <p class="control has-icons-left">
-                <input
-                  id="password"
-                  class="input"
-                  type="password"
-                  placeholder="Password"
-                  required
-                />
-                <span class="icon is-small is-left">
-                  <i class="fas fa-lock"></i>
-                </span>
-              </p>
-            </div>
+        </div>
+        <div class="column">
+          <div class="field">
+            <p class="control has-icons-left">
+              <input id="password" class="input" type="password" placeholder="Password" required />
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+            </p>
           </div>
-          <div class="column">
-            <div class="buttons">
-              <button id="login-button" class="button is-primary">
-                Sign in
-              </button>
-              <a href="/register" class="button is-secondary">Register</a>
-            </div>
+        </div>
+        <div class="column">
+          <div class="buttons">
+            <button id="login-button" class="button is-primary">
+              Sign in
+            </button>
+            <a href="/register" class="button is-secondary">Register</a>
           </div>
-          <input id="phone" name="phone" value="" hidden disabled style="display: none;"/>
-        </form>
-        <span id="error" style="display: none" class="has-text-danger">
-          Name or password is wrong.
-        </span>
-      </div>
+        </div>
+        <input id="phone" name="phone" value="" class="is-hidden" hidden />
+      </form>
+      <span id="error" style="display: none" class="has-text-danger">
+        Name or password is wrong.
+      </span>
     </div>
-    <script type="module" src="scripts/login.js"></script>
-    <script
-      defer
-      src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"
-    ></script>
-  </body>
+  </div>
+  <script type="module" src="scripts/login.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+</body>
+
 </html>
