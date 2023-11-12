@@ -10,6 +10,7 @@ const { registerWebsocketServer } = require('./websocket-server');
 const register = require('./controllers/register');
 const login = require('./controllers/login');
 const verify = require('./controllers/verify');
+const changePassword = require('./controllers/change-password');
 const devices = require('./controllers/devices');
 const challenges = require('./controllers/challenges');
 const pages = require('./controllers/pages');
@@ -38,6 +39,7 @@ app.post('/api/login', login);
 app.post('/api/register', register);
 app.post('/api/verify/send', verify.send);
 app.post('/api/verify/check', verify.check);
+app.post('/api/change-password', changePassword);
 
 // middleware to validate session
 app.post('/api/devices/token', validateSession, devices.token);
