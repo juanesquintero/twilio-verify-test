@@ -48,6 +48,11 @@ app.get('/api/challenges/status', validateSession, challenges.status);
 
 app.get('/push-challenge-pending', validateSession, pages.pending);
 app.get('/profile', validateSessionWithMultifactor, pages.profile);
+app.get(
+  '/profile/change-password',
+  validateSessionWithMultifactor,
+  pages.password
+);
 app.get('/logout', validateSessionWithMultifactor, pages.logout);
 app.get('/reject', pages.reject);
 app.get('/', pages.login);
