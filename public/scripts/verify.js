@@ -1,5 +1,6 @@
 import { showError, checkResponse } from './utils.js';
 import { apiRegister } from './register.js';
+import { apiChangePassword } from './change-password.js';
 
 let flow;
 let user = {};
@@ -60,7 +61,7 @@ const next = () => {
       window.location = '/profile';
       break;
     case 'change-password':
-      // changePassword(user);
+      apiChangePassword(user);
       break;
     default:
       break;
