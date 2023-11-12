@@ -41,7 +41,8 @@ export const apiChangePassword = async (body) => {
       body: JSON.stringify(body),
     });
     checkResponse(response);
-    window.location = '/profile';
+    const msg = 'Your password has been changed!';
+    window.location = `/profile?msg=${msg}`;
   } catch (error) {
     showError(error);
   }

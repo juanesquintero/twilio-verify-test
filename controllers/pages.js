@@ -54,6 +54,8 @@ module.exports.profile = (request, response) => {
   let page = fs.readFileSync('pages/profile.html', 'utf8');
 
   const { user } = request.session;
+  
+  const { msg } = request.query;
 
   const twoFAuthEnable = helper.has2FactorAuthEnabled(user);
 
@@ -62,6 +64,7 @@ module.exports.profile = (request, response) => {
     pushIsDisabled: !twoFAuthEnable,
     pushIsEnabled: !!twoFAuthEnable,
     expiresIn: Math.round(request.session.cookie.maxAge / 1000 / 60),
+    msg,
   };
 
   let render = mustache.render(page, view);
