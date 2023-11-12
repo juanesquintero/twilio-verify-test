@@ -10,6 +10,27 @@
 This project is a clone of [yafuquen/twilio-verify-example](https://github.com/yafuquen/twilio-verify-example)
 Review the documentation there for more Twilio information.
 
+## TechStack
+
+<i>Node.js</i> 18.4.1
+https://nodejs.org/en/download
+
+<i>Express.js</i> 4.17.1
+https://expressjs.com/
+
+<i>Mustache</i> 4.2.0
+https://github.com/janl/mustache.jshttps://typer.tiangolo.com/
+
+<i>MongoDB</i> 6.0
+https://www.mongodb.com/try/download/community
+
+<i>Twilio</i> 3.68.0
+https://www.npmjs.com/package/twilio
+
+---
+
+<br>
+
 
 ## Installation
 
