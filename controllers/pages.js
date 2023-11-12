@@ -15,9 +15,9 @@ module.exports.password = (request, response) => {
 
   const view = {
     fields: ids.map((id) => ({ id, label: camelize(id) })),
-    name: user?.name ?? '',
     twoFA: helper.has2FactorAuthEnabled(user),
-    phone: user?.phone,
+    userPairs: Object.entries(user).map(([key, value]) => ({ key, value })),
+    user: JSON.stringify(user),
   };
 
   const render = mustache.render(page, view);
