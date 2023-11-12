@@ -1,12 +1,12 @@
-const bcrypt = require("bcrypt");
-const { v4: uuidv4 } = require("uuid");
-const { MongoClient } = require("mongodb");
+const bcrypt = require('bcrypt');
+const { v4: uuidv4 } = require('uuid');
+const { MongoClient } = require('mongodb');
 
 const { MONGO_DBNAME, MONGO_PORT, MONGO_USER, MONGO_PSSWD } = process.env;
 const db = {
-  host: "localhost",
-  port: MONGO_PORT || "27017",
-  name: MONGO_DBNAME || "twilioverify",
+  host: 'localhost',
+  port: MONGO_PORT || '27017',
+  name: MONGO_DBNAME || 'twilioverify',
   user: MONGO_USER,
   pwd: MONGO_PSSWD,
 };
@@ -18,10 +18,10 @@ class Repository {
     MongoClient.connect(mongoURI)
       .then((client) => {
         this.db = client.db(db.name);
-        this.users = this.db.collection("users");
-        console.log("Connected to MongoDB");
+        this.users = this.db.collection('users');
+        console.log('Connected to MongoDB');
       })
-      .catch((error) => console.error("Error connecting to MongoDB:", error));
+      .catch((error) => console.error('Error connecting to MongoDB:', error));
   }
 
   async create(name, password, phone = null, twoFA = false) {
@@ -64,16 +64,29 @@ class Repository {
     return user;
   }
 
-  async addPushVerification(id, factor) {
+  async updatePassword(id, newPassword) {
     const result = await this.users.findOneAndUpdate(
       { id: id },
-      { $set: { ...user, factor: factor } },
-      { returnDocument: "after" }
+      { $set: { ...user, password: bcrypt.hashSync(newPassword, 10) } },
+      { returnDocument: 'after' }
     );
     if (result.value) {
       res.json(result.value);
     } else {
-      res.status(404).json({ error: "User not found" });
+      res.status(404).json({ error: 'User not found' });
+    }
+  }
+
+  async addPushVerification(id, factor) {
+    const result = await this.users.findOneAndUpdate(
+      { id: id },
+      { $set: { ...user, factor: factor } },
+      { returnDocument: 'after' }
+    );
+    if (result.value) {
+      res.json(result.value);
+    } else {
+      res.status(404).json({ error: 'User not found' });
     }
   }
 }
