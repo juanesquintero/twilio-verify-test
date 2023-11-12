@@ -1,20 +1,19 @@
-# Twilio Verify Push Website Login
+# Twilio Verify Test
 
-Twilio Verify Push is a multi-factor authentication method that requires the user to approve a transaction with an mobile application. This project demonstrates how to secure a login on a website. The user is granted access to the page after the sign up was approved with the app which has the Android or iOS Verify SDK embedded.
 
-Twilio Verify Push SDK helps you adding multi-factor sdcurity with a low-friction and secure setup. This fully managed API service allows you to seamlessly verify users in-app via a secure channel.
+**Source Code** : Repository [twilio-verify-test](https://github.com/juanesquintero/twilio-verify-test)
 
-This repository contains the website and the server backend written in NodeJS. For the mobile application please checkout the [Android Quickstart](https://github.com/twilio/twilio-verify-android) and [iOS Quickstart](https://github.com/twilio/twilio-verify-ios).
+**Author** : Juanes Quintero [GitLab](https://gitlab.com/juanesquintero) [GitHub](https://github.com/juanesquintero)
 
-You can watch a video on Twitch that demonstrates this project. [Twilio Verify Push @ Signal TV 2020](https://www.twitch.tv/videos/759095000)
+<hr>
 
-## Device Registration
+This project is a clone of [yafuquen/twilio-verify-example](https://github.com/yafuquen/twilio-verify-example)
+Review the documentation there for more Twilio information.
 
-![Device Registration Flow](device-registration-flow.png)
 
 ## Installation
 
-Fork and clone the repository. Then, install dependencies with
+Clone the repository. Then, install dependencies with
 
 `npm install`
 
@@ -29,16 +28,14 @@ Before you start the install, you’ll need to collect the following variables f
 
 ### Configure the Verify Service
 
-Create a [Push credential](https://www.twilio.com/docs/verify/quickstarts/push-ios#create-a-push-credential) for Push.
-Configure a [Verify Service](https://www.twilio.com/docs/verify/quickstarts/push-ios#create-a-verify-service-and-add-the-push-credential)
-
-To run this application you need to host it on a public domain.
+To configure Twilio Verify service go to base repo and review docs
 
 Add the `TWILIO_VERIFY_SERVICE_SID` to your environment variables
 
-Start the application
+Start the application in development mode
 
-`npm start`
+`npm run dev`
+
 
 Your application should now be running at **http://localhost:5000/**.
 
@@ -48,62 +45,8 @@ Access **http://localhost:5000/register** on your browser, you can now register 
 
 In the default setting no device is register as a factor, a user can sign up and access the profile page.
 
-### Register a Mobile Application
+### Login with a user
 
-This project requires a mobile app with the Verify SDK embedded that implements the following API calls.
-
-**POST /api/login**
-
-```json
-{
-  "name": "Bob",
-  "password": "Builder"
-}
-```
-
-**Response:**
-
-Returns the session Cookie and the userId you later use to register the factor. The Cookie needs to be added to the susequental API calls.
-
-```json
-{
-  "id": "e13cf2ec-5def-4652-b22b-6f1bca6b55ae"
-}
-```
-
-**POST /api/devices/token**
-
-**Response:**
-
-```json
-{
-  "token": "...",
-  "serviceSid": "VA....",
-  "identity": "e13cf2ec-5def-4652-b22b-6f1bca6b55ae",
-  "factorType": "push"
-}
-```
-
-Returns a JSON object with the access token the Verify SDK will use to register the factor with Twilio.
-
-**POST /api/devices/register**
-
-```json
-{
-  "id": "e13cf2ec-5def-4652-b22b-6f1bca6b55ae",
-  "sid": "YF...."
-}
-```
-
-**Response:**
-
-```json
-{
-  "done": true
-}
-```
-
-Saves the created Factor on the website backend, if the factor is stored on the user a login request will promt the user on the mobile application to approve or denie the rquest. After the challenge is approved or denied, the website will automatically redirect.
 
 # License
 
