@@ -41,9 +41,6 @@ This project can be run it by installing Node.js <= 18.14 and Docker >= 24.0.6 (
 
 ---
 
-<br>
-
-
 ## Installation
 
 Clone the repository. Then, install dependencies with
@@ -69,6 +66,10 @@ Also you will need to set up the following MongoDB env variables
 `MONGO_PORT`
 
 
+---
+
+## Execution
+
 Start the application in development mode
 
 `npm run dev`
@@ -85,6 +86,10 @@ this will just run the Express server, ensure your mongo service is up and runni
 
 
 Your application should now be running at **http://localhost:5000/**.
+
+---
+
+<br>
 
 # License
 
