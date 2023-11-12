@@ -1,7 +1,8 @@
-const context = require("../context");
+const context = require('../context');
 
 const changePassword = async (request, response) => {
-  const { name, current, newOne, confirmation  } = request.body;
+  const { current, newOne, confirmation } = request.body;
+  const { id, name } = request.body.user;
 
   if (newOne !== confirmation) {
     return response.status(400).end();
@@ -12,8 +13,8 @@ const changePassword = async (request, response) => {
     current
   );
 
-  if (user) {
-    return response.status(409).end();
+  if (!user) {
+    return response.status(404).end();
   }
 
   await context.repository.updatePassword(id, newOne);
