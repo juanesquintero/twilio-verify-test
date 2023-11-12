@@ -1,14 +1,30 @@
-const fs = require('fs');
-const path = require('path');
-const bcrypt = require('bcrypt');
-const { v4: uuidv4 } = require('uuid');
+const bcrypt = require("bcrypt");
+const { v4: uuidv4 } = require("uuid");
+const { MongoClient } = require("mongodb");
+
+const { MONGO_DBNAME, MONGO_PORT, MONGO_USER, MONGO_PSSWD } = process.env;
+const db = {
+  host: "localhost",
+  port: MONGO_PORT || "27017",
+  name: MONGO_DBNAME || "twilioverify",
+  user: MONGO_USER,
+  pwd: MONGO_PSSWD,
+};
+
+const mongoURI = `mongodb://${db.user}:${db.pwd}@${db.host}:${db.port}/${db.name}?authSource=admin`;
 
 class Repository {
   constructor() {
-    this.users = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'users.json'), 'utf8'));
+    MongoClient.connect(mongoURI)
+      .then((client) => {
+        this.db = client.db(db.name);
+        this.users = this.db.collection("users");
+        console.log("Connected to MongoDB");
+      })
+      .catch((error) => console.error("Error connecting to MongoDB:", error));
   }
 
-  async create(name, password, phone=null, twoFA=false) {
+  async create(name, password, phone = null, twoFA = false) {
     const user = {
       id: uuidv4(),
       password: bcrypt.hashSync(password, 10),
@@ -16,12 +32,12 @@ class Repository {
       name,
       twoFA,
     };
-    this.users.push(user);
-    this.save();
+
+    await this.users.insertOne(user);
   }
 
   async findUserByNameAndPassword(name, password) {
-    const user = this.users.filter((user) => user.name === name)[0];
+    const user = await this.users.findOne({ name: name });
 
     if (!user) {
       return;
@@ -37,35 +53,28 @@ class Repository {
   }
 
   async findByName(name) {
-    const user = this.users.filter((user) => user.name === name)[0];
+    const user = await this.users.findOne({ name: name });
 
     return user;
   }
 
   async findById(id) {
-    const user = this.users.filter((user) => user.id === id)[0];
+    const user = await this.users.findOne({ id: id });
 
     return user;
   }
 
   async addPushVerification(id, factor) {
-    const user = this.users.filter((user) => user.id === id)[0];
-
-    if (!user) {
-      return;
-    }
-
-    this.users = this.users.map((user) => (user.id === id ? { ...user, factor: factor } : user));
-
-    await this.save();
-  }
-
-  async save() {
-    fs.writeFileSync(
-      path.join(process.cwd(), 'users.json'),
-      JSON.stringify(this.users, 0, 3),
-      'utf-8'
+    const result = await this.users.findOneAndUpdate(
+      { id: id },
+      { $set: { ...user, factor: factor } },
+      { returnDocument: "after" }
     );
+    if (result.value) {
+      res.json(result.value);
+    } else {
+      res.status(404).json({ error: "User not found" });
+    }
   }
 }
 
