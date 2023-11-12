@@ -5,27 +5,39 @@
 
 **Author** : Juanes Quintero [GitLab](https://gitlab.com/juanesquintero) [GitHub](https://github.com/juanesquintero)
 
-<hr>
 
-This project is a clone of [yafuquen/twilio-verify-example](https://github.com/yafuquen/twilio-verify-example)
-Review the documentation there for more Twilio information.
+This project is a web focused clone of [yafuquen/twilio-verify-example](https://github.com/yafuquen/twilio-verify-example), review the documentation there for more Twilio information.
+
+<hr>
 
 ## TechStack
 
-<i>Node.js</i> 18.4.1
-https://nodejs.org/en/download
+[Node.js 18.4.1](https://nodejs.org/en/)
 
-<i>Express.js</i> 4.17.1
-https://expressjs.com/
+[Express.js 4.17.1](https://expressjs.com/)
 
-<i>Mustache</i> 4.2.0
-https://github.com/janl/mustache.jshttps://typer.tiangolo.com/
+[Mustache 4.2.0](https://github.com/janl/mustache.js)
 
-<i>MongoDB</i> 6.0
-https://www.mongodb.com/try/download/community
+[MongoDB 6.0](https://www.mongodb.com/)
 
-<i>Twilio</i> 3.68.0
-https://www.npmjs.com/package/twilio
+[Twilio 3.68.0](https://www.npmjs.com/package/twilio)
+
+---
+
+<br>
+
+
+## Requirements
+
+This project can be run it by installing Node.js <= 18.14 and Docker >= 24.0.6 (if you prefer to use the DB directly in your local machine you can skip the Docker requirement).
+
+  **Docker** <br>
+  https://www.docker.com/resources/what-container <br>
+  https://www.docker.com/get-started
+
+  **Node.js** <br>
+  https://nodejs.org/en/download
+
 
 ---
 
@@ -38,36 +50,41 @@ Clone the repository. Then, install dependencies with
 
 `npm install`
 
-To run the application, you'll need to gather your Twilio account credentials and configure them in a file named .env. To create this file from an example template, do the following in your Terminal.
+Create a .env file from an example template, do the following in your Terminal
 
 `cp .env.sample .env`
 
-Before you start the install, you’ll need to collect the following variables from the Twilio Account Portal.
+To run the application, you'll need set up your Twilio account credentials and configure the Verify Service, so you’ll need to collect the following variables from the Twilio Account Portal.
 
 `TWILIO_ACCOUNT_SID`
 `TWILIO_AUTH_TOKEN`
+`TWILIO_VERIFY_SERVICE_SID`
 
-### Configure the Verify Service
+<small>for more information go to base repo and review docs</small>
 
-To configure Twilio Verify service go to base repo and review docs
+Also you will need to set up the following MongoDB env variables
+`MONGO_DBNAME`
+`MONGO_USER`
+`MONGO_PSSWD`
+`MONGO_PORT`
 
-Add the `TWILIO_VERIFY_SERVICE_SID` to your environment variables
 
 Start the application in development mode
 
 `npm run dev`
 
+This command will star first the 2 Mongodb containers based on the docker-compose.yml file, then it will run the Express.js app. 
+
+One container is for the database server and the other one for a UI db management tool. 
+
+If you install the mongodb server outside Docker please use...
+
+`npm start`
+
+this will just run the Express server, ensure your mongo service is up and running
+
 
 Your application should now be running at **http://localhost:5000/**.
-
-### Register a Local User
-
-Access **http://localhost:5000/register** on your browser, you can now register a first user.
-
-In the default setting no device is register as a factor, a user can sign up and access the profile page.
-
-### Login with a user
-
 
 # License
 
