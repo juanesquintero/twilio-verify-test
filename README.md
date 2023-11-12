@@ -1,5 +1,6 @@
 # Twilio Verify Test
 
+<br>
 
 **Source Code** : Repository [twilio-verify-test](https://github.com/juanesquintero/twilio-verify-test)
 
@@ -8,7 +9,9 @@
 
 This project is a web focused clone of [yafuquen/twilio-verify-example](https://github.com/yafuquen/twilio-verify-example), review the documentation there for more Twilio information.
 
-<hr>
+---
+
+<br>
 
 ## TechStack
 
@@ -23,8 +26,6 @@ This project is a web focused clone of [yafuquen/twilio-verify-example](https://
 [Twilio 3.68.0](https://www.npmjs.com/package/twilio)
 
 ---
-
-<br>
 
 
 ## Requirements
