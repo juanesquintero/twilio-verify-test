@@ -61,7 +61,16 @@ const next = () => {
       window.location = '/profile';
       break;
     case 'change-password':
-      apiChangePassword(user);
+      const payload = {
+        current: user['current-password'],
+        newOne: user['new-password'],
+        confirmation: user['new-password-confirmation'],
+        user: {
+          id: user.id,
+          name: user.name,
+        }
+      };
+      apiChangePassword(payload);
       break;
     default:
       break;
