@@ -3,13 +3,22 @@ import { showError, checkResponse } from './utils.js';
 const changePassword = async (event) => {
   event.preventDefault();
 
+  let user = globalUser ? JSON.parse(globalUser) : {};
+
   const current = document.getElementById('current-password').value;
   const newOne = document.getElementById('new-password').value;
   const confirmation = document.getElementById(
     'new-password-confirmation'
   ).value;
 
-  apiChangePassword({ current, newOne, confirmation });
+  if (newOne !== confirmation) {
+    showError('New Password Confirmation are NOT equal');
+    return;
+  }
+
+  user = { id: user.id, name: user.name };
+
+  apiChangePassword({ user, current, newOne, confirmation });
 };
 
 export const apiChangePassword = async (body) => {
