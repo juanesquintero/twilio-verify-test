@@ -1,7 +1,5 @@
 import { showError, checkResponse } from './utils.js';
 
-let twoFA = globalTwoFA !== 'false'
-
 const changePassword = async (event) => {
   event.preventDefault();
 
@@ -35,8 +33,7 @@ const changePasswordForm = document.getElementById('change-password-form');
 
 if (changePasswordForm) {
   changePasswordForm.addEventListener('submit', changePassword);
-
-  if (twoFA) {
+  if (globalTwoFA !== 'false') {
     changePasswordForm.action = '/verify/change-password';
     changePasswordForm.addEventListener('submit', function (event) {
       this.submit();
