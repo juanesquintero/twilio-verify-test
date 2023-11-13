@@ -2,12 +2,12 @@
 
 <br>
 
-**Source Code** : Repository [twilio-verify-test](https://github.com/juanesquintero/twilio-verify-test)
+**Source Code**: &nbsp; Repository -> [twilio-verify-test](https://github.com/juanesquintero/twilio-verify-test)
 
-**Author** : Juanes Quintero [GitLab](https://gitlab.com/juanesquintero) [GitHub](https://github.com/juanesquintero)
+**Author**: &nbsp; Juanes Quintero -> [GitLab](https://gitlab.com/juanesquintero) / [GitHub](https://github.com/juanesquintero)
 
 
-This project is a web focused clone of [yafuquen/twilio-verify-example](https://github.com/yafuquen/twilio-verify-example), review the documentation there for more Twilio information.
+This project is a web focused clone of [yafuquen/twilio-verify-example](https://github.com/yafuquen/twilio-verify-example), review the documentation there for more information about Twilio.
 
 ---
 
