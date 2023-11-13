@@ -112,7 +112,43 @@ MongoDB sevrer Database on **localhost:27017**
 
 ---
 
-<!-- TODO Explain the use cases -->
+# Use Cases
+
+Verify API process  
+  - User receives a sms/wpp message with OTP code.
+  - User types/enters the OTP code.
+  - Verifies the code against the Verify API, to authorize user.
+
+### 1. Registration
+
+Register on http://localhost:5000/register form,
+with following fields: username, password, phone number and enable 2FA or not.
+
+If 2FA checked and phone entered:
+  - verifies user with Verify API.
+  - register request completed
+
+else create new user directly.
+
+### 2. Login
+  
+A registred user can LogIn at http://localhost:5000/login form with following fields: username, password.
+
+If 2FA enabled:
+  - verifies user with Verify API.
+  - login request completed
+
+else open user session directly.
+
+### 3. Change Password
+  
+A loggedin user can change password at http://localhost:5000/profile/change-password
+
+If 2FA enabled:
+  - verifies user with Verify API.
+  - change password request completed with message.
+
+else change password directly.
 
 # License
 
