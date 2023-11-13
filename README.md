@@ -11,7 +11,6 @@ This project is a web focused clone of [yafuquen/twilio-verify-example](https://
 
 ---
 
-<br>
 
 ## TechStack
 
@@ -61,11 +60,13 @@ To run the application, you'll need set up your Twilio account credentials and c
 <small>for more information go to base repo and review docs</small>
 
 Also you will need to set up the following MongoDB env variables
-`MONGO_DBNAME`
-`MONGO_USER`
-`MONGO_PSSWD`
-`MONGO_PORT`
 
+  ```dosini
+  MONGO_DBNAME=
+  MONGO_USER=
+  MONGO_PSSWD=
+  MONGO_PORT=
+  ```
 
 ---
 
@@ -73,24 +74,45 @@ Also you will need to set up the following MongoDB env variables
 
 Start the application in development mode
 
-`npm run dev`
+  ```bash
+  $ npm run dev
+  ```
 
-This command will star first the 2 Mongodb containers based on the docker-compose.yml file, then it will run the Express.js app. 
+This command will star first the 2 Mongodb containers based on the docker-compose.yml file behind with...
+
+  ```bash
+  $ docker compose up -d
+  ```
+
+...then it will run the Express.js app with... 
+  
+  ```bash
+  $ nodemon index.js
+  ```
 
 One container is for the database server and the other one for a UI db management tool. 
 
 If you install the mongodb server outside Docker please use...
 
-`npm start`
+  ```bash
+  $ npm start
+  ```
 
-this will just run the Express server, ensure your mongo service is up and running
+...this will just run the Express server, ensure your mongo service is up and running.
 
 
-Your application should now be running at **http://localhost:5000/**.
+## Check it out
+
+Express.js app now should be running at **http://localhost:5000/**
+
+Mongo Express GUI on **[http://localhost:8081](http://localhost:8081)**
+
+MongoDB sevrer Database on **localhost:27017**
+
 
 ---
 
-<br>
+<!-- TODO Explain the use cases -->
 
 # License
 
